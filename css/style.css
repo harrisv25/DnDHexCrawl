@@ -1,5 +1,16 @@
 body {
     background-color: bisque;
+    background-image: url('../img/ocean.webm');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    background-repeat: no-repeat;
+}
+
+#org-container {
+    display:flex;
+    align-items: center;
 }
 
 #island {
@@ -8,11 +19,16 @@ body {
     --f: calc(var(--s) * 1.732 + 4 * var(--m) - 1px);  */
 }
 
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
 #hex-container {
-    background-color: yellow;
     position:absolute;
-    top:5%;
-    left: 10%;
+    top:150px;
+    left: 550px;
     width: 1500px;
     height:1100px;
     --s: 200px;
@@ -114,4 +130,15 @@ body {
     -o-background-size: cover;
     background-size: cover; 
     background-repeat: no-repeat;
+}
+
+#background {
+    position: absolute;
+    background-color: gray;
+    width: 840px;
+    height: calc(840px* 1.1547);
+    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+    transform: rotate(30deg);
+    left:865px;
+    top:200px;
 }
