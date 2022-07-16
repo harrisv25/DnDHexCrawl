@@ -13,33 +13,70 @@ const weapons = {
     "mastercraft hammer" : 11,
 }
 
+const shields = {
+    'shield' : 1,
+    'fine shield' : 2,
+    'great shield' : 3, 
+    'mastercraft shield' : 4,
+}
+
+const armor = {
+    "ragged hat" : 0,
+    'ragged shirt':0,
+    'ragged pants':0,
+    'ragged shoes':0,
+    "leather helmet" : 1,
+    'leather chest':1,
+    'leather leggings':1,
+    'leather boots':1,
+    "chainmail helmet" : 2,
+    'chainmail chest':2,
+    'chainmail leggings':2,
+    'chainmail boots':2,
+    "full-plate helmet" : 3,
+    'full-plate chest':3,
+    'full-plate leggings':3,
+    'full-plate boots':3,
+}
+
 class Hero {
     constructor (name) {
-        this.name = name
-        this.attack = 1
-        this.defense = 1
-        this.hp = 10
-        this.speed = 30
-        this.right = 'dagger'
+        this.weapon = 'dagger'
         this.left = 'shield'
         this.head = "ragged hat"
         this.chest = 'ragged shirt'
         this.legs = 'ragged pants'
         this.feet = 'ragged shoes'
+        this.name = name
+        this.weapon = this.weapon
+        this.defense = 1 + shields[this.left]
+        this.hp = 10 + armor[this.head] + armor[this.chest] + armor[this.legs] + armor[this.feet] 
+        this.speed = 30
     }
     getName = () => this.name
-    getAttack = () => this.attack
+    getWeapon = () => this.weapon
     getDefense = () => this.defense
     getHp = () => this.hp
     getSpeed = () => this.speed
-    getRight = () => this.right
+    getWeapon = () => this.weapon
     getLeft = () => this.left
     getHead = () => this.head
     getChest = () => this.chest
     getLegs = () => this.legs
     getFeet = () => this.feet
-    makeAttack = () => 1+Math.floor(Math.random() * (weapons[this.right] - 1))
+    weaponAttack = () => 1 + Math.floor(Math.random() * (weapons[test.weapon]))
+    makeAttack = (target) => {
+        let dmg = this.weaponAttack() - target.defense
+        if (dmg > 0) {
+            target.hp = target.hp - dmg
+        }
+    }
+}
+
+monster ={
+    hp : 10,
+    defense : 2
 }
 
 let test = new Hero('Sprinkles')
-console.log(test.makeAttack())
+console.log(test)
