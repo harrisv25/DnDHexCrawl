@@ -2,50 +2,72 @@ body {
     background-color: bisque;
 }
 
-section {
-    position: absolute;
+#island {
+    --s: 200px;
+    --m: 4px;
+    --f: calc(var(--s) * 1.732 + 4 * var(--m) - 1px);  */
+}
+
+#hex-container {
+    background-color: yellow;
+    position:absolute;
+    top:5%;
+    left: 20%;
+    width: 1500px;
+    height:1100px;
+    --s: 200px;
+    --m: 4px;
+    --f: calc(var(--s) * 1.732 + 4 * var(--m) - 1px); 
 }
 
 .hex {
-    float: left;
-    margin-left: 3px;
-    margin-bottom: -26px;
-}
+    background-color: aqua;
+    width: var(--s);
+    margin: var(--m);
+    height: calc(var(--s) * 1.1547);
+    display: inline-block;
+    font-size:initial;
+    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+    margin-bottom: calc(var(--m) - var(--s) * 0.2885);
+  }
 
-.hex:before {
-    content: " ";
-    width: 0; height: 0;
-    border-bottom: 30px solid #6C6;
-    border-left: 52px solid transparent;
-    border-right: 52px solid transparent;
-    position: absolute;
-    top: -30px;
-}
-
-.hex {
-    margin-top: 30px;
-    width: 104px;
-    height: 60px;
-    background-color: #6C6;
+  .hex {
     position: relative;
+    top: 1000px;
 }
 
-.hex:after {
-    content: "";
-    width: 0; height: 0;
-    position: absolute;
-    bottom: -30px;
-    left:0;
-    border-top: 30px solid #6C6;
-    border-left: 52px solid transparent;
-    border-right: 52px solid transparent;
+.hex:nth-child(n+1):nth-child(-n+3) {
+    background-color: blue;
+    top: 50px;
+    left: 425px;
 }
 
-.hex-row {
-    clear: left;
-}
-.hex-row.even {
-    margin-left: 53px;
+.hex:nth-child(n+4):nth-child(-n+7) {
+    background-color: green;
+    top: 230px;
+    left: -304px;
 }
 
+.hex:nth-child(n+8):nth-child(-n+12) {
+    background-color: pink;
+    top: 230px;
+    left: 215px;
+}
 
+.hex:nth-child(n+13):nth-child(-n+14) {
+    background-color: purple;
+    top: 413px;
+    right: 306px;
+}
+
+.hex:nth-child(n+15):nth-child(-n+16) {
+    background-color: darkgoldenrod;
+    top: 232px;
+    right: -318px;
+}
+
+.hex:nth-child(n+17):nth-child(-n+20) {
+    background-color: red;
+    top: 415px;
+    right: -6px;
+} 
