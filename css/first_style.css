@@ -70,16 +70,11 @@ ul {
     right: 6.85%;
 }
 
-.hex:nth-child(n+14):nth-child(-n+16) {
+.hex:nth-child(n+14):nth-child(-n+17) {
     background-color: purple;
     margin-top: 15.3%;
     right: 33.3%;
 }
-/* .hex:nth-child(n+14):nth-child(-n+17) {
-    background-color: purple;
-    margin-top: 15.3%;
-    right: 33.3%;
-} */
 
 .hex:nth-child(n+18):nth-child(-n+20) {
     background-color: red;

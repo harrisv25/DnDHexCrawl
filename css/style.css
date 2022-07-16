@@ -12,7 +12,7 @@ body {
     background-color: yellow;
     position:absolute;
     top:5%;
-    left: 20%;
+    left: 10%;
     width: 1500px;
     height:1100px;
     --s: 200px;
@@ -37,37 +37,81 @@ body {
 }
 
 .hex:nth-child(n+1):nth-child(-n+3) {
-    background-color: blue;
     top: 50px;
     left: 425px;
 }
 
 .hex:nth-child(n+4):nth-child(-n+7) {
-    background-color: green;
     top: 230px;
     left: -304px;
 }
 
 .hex:nth-child(n+8):nth-child(-n+12) {
-    background-color: pink;
     top: 230px;
     left: 215px;
 }
 
 .hex:nth-child(n+13):nth-child(-n+14) {
-    background-color: purple;
     top: 413px;
     right: 306px;
 }
 
 .hex:nth-child(n+15):nth-child(-n+16) {
-    background-color: darkgoldenrod;
     top: 232px;
     right: -318px;
 }
 
 .hex:nth-child(n+17):nth-child(-n+20) {
-    background-color: red;
     top: 415px;
     right: -6px;
 } 
+
+.Forest {
+    background-color: green;
+    background-image: url('../img/forest.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    background-repeat: no-repeat;
+}
+
+.Mountain {
+    background-color: grey;
+    background-image: url('../img/mount.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    background-repeat: no-repeat;
+}
+
+.Plain {
+    background-color: goldenrod;
+    background-image: url('../img/plains.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    background-repeat: no-repeat;
+}
+
+.City {
+    background-color: maroon;
+    background-image: url('../img/city.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    background-repeat: no-repeat;
+}
+
+.Dark-Tower {
+    background-color: black;
+    background-image: url('../img/tower.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    background-repeat: no-repeat;
+}
