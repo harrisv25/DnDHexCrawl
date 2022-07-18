@@ -52,6 +52,8 @@ class Hero {
         this.defense = 1 + shields[this.left]
         this.hp = 10 + armor[this.head] + armor[this.chest] + armor[this.legs] + armor[this.feet] 
         this.speed = 30
+        this.gold = 0
+        this.pack = []
     }
     getName = () => this.name
     getWeapon = () => this.weapon
@@ -64,6 +66,8 @@ class Hero {
     getChest = () => this.chest
     getLegs = () => this.legs
     getFeet = () => this.feet
+    getGold = () => this.gold
+    getPack = () => this.pack
     weaponAttack = () => 1 + Math.floor(Math.random() * (weapons[test.weapon]))
     makeAttack = (target) => {
         let dmg = this.weaponAttack() - target.defense
@@ -72,6 +76,16 @@ class Hero {
         }
     }
 }
+
+class Enemy (
+    constructor (creature, attack, defense, hp, loot) {
+        this.creature = creature
+        this.attack = attack
+        this.defense = defense
+        this.hp = hp
+        this.loot = loot
+    }
+)
 
 monster ={
     hp : 10,
