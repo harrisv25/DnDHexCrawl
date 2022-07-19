@@ -5,7 +5,31 @@ class Hex {
         this.id = id
         this.uid = this.type + '-' +parseInt(this.id)
         this.space = 0
+        this.adjacents = []
     }
+}
+
+const adjacents = {
+    1: [2, 4, 5],
+    2: [1, 3, 5, 6],
+    3: [2, 6, 7],
+    4: [1, 5, 8, 9],
+    5: [1, 2, 4, 6, 9, 10],
+    6: [2, 3, 5, 7, 10, 11],
+    7: [3, 6, 11, 12],
+    // accidently switched 13,14, with 15, 16. This accounts for the odd groupings
+    8: [4, 9, 15],
+    9: [4, 5, 8, 10, 15, 16],
+    10: [5, 6, 9, 11, 16, 13],
+    11: [6, 7, 10, 12, 13, 14],
+    12: [7, 11, 14],
+    13: [10, 11, 16, 14, 18, 19],
+    14: [11, 12, 13, 19],
+    15: [8, 9, 16, 17],
+    16: [9, 10, 13, 15, 17, 18],
+    17: [15, 16, 18],
+    18: [13, 16, 17, 19],
+    19: [13, 14, 18],
 }
 
 //Set two normalized hexes on the map
@@ -39,9 +63,6 @@ console.log(island)
 //process into a mathmatical postiioning system, but time does not allow yet. 
 space = 1
 island.forEach(hx => {
-    if ((space === 3) || (space === 10)) {
-        space += 1
-    }
     hx.space = space
     space += 1
 });
@@ -78,6 +99,7 @@ island.forEach(hx => {
     document.querySelector("#hex-container").appendChild(tempNode)
 });
 
+//create placement for the hero to start in the city
 let start = document.querySelector(".City")
 let hero = document.createElement('div');
 hero.setAttribute('id', 'hero')
@@ -87,14 +109,20 @@ start.appendChild(hero)
 //remove the temporary hex
 document.querySelector('#temp').parentNode.removeChild(document.querySelector('#temp'))
 
-function popup(mylink, windowname) {
-    if (! window.focus)return true; 
-        var href; 
-    if (typeof(mylink) == 'string') href=mylink; 
-    else href=mylink.href; 
-        window.open(href, windowname, 'width=400,height=200,scrollbars=yes'); 
-        return false; 
-}
 
-popup('../combat.html', "test")
+
+
+
+
+
+// function popup(mylink, windowname) {
+//     if (! window.focus)return true; 
+//         var href; 
+//     if (typeof(mylink) == 'string') href=mylink; 
+//     else href=mylink.href; 
+//         window.open(href, windowname, 'width=400,height=200,scrollbars=yes'); 
+//         return false; 
+// }
+
+// popup('../combat.html', "test")
 
