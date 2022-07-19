@@ -1,12 +1,25 @@
 // create class to host data about the hexes
 class Hex {
-    constructor(type, id, space) {
+    constructor(type, id) {
         this.type = type
         this.id = id
         this.uid = this.type + '-' +parseInt(this.id)
         this.space = 0
         this.adjacents = []
+        this.div = null
     }
+    moveHex = () => {
+        if (adjacentHexes.includes(this.space)) {
+            const hero = document.querySelector('#hero')
+            const targetHex = document.querySelector('#'+this.uid)
+            targetHex.appendChild(hero)
+            findCurrentHex()
+            adjacentHexes = onLocation.adjacents
+            console.log(adjacentHexes)
+        }}
+    // this.div.addEventListener('click', event => {
+    //     moveHex()
+    // })
 }
 
 const adjacents = {
@@ -83,9 +96,10 @@ console.log(hex)
 island.forEach(hx => {
     let tempNode = hex.cloneNode(true);
     tempNode.classList.add(hx.type, hx.id, hx.space);
-    tempNode.setAttribute('id', hx.space)
+    tempNode.setAttribute('id', hx.uid)
     tempNode.innerHTML = hx.uid
     document.querySelector("#hex-container").appendChild(tempNode)
+    hx.div = tempNode
 });
 
 //create placement for the hero to start in the city
@@ -99,13 +113,10 @@ start.appendChild(hero)
 document.querySelector('#temp').parentNode.removeChild(document.querySelector('#temp'))
 
 
-//access hero's parent div and select adjacent hexes as selectable movement locations
-
+//select the current hex object associated with the hex div that the hero is on
 let onLocation = null
 function findCurrentHex () {
     let cHx = document.querySelector('#hero').parentNode
-    // console.log(cHx.classList[3])
-    // console.log(cHx.classList[1], cHx.classList[2])
     island.forEach(hx => {
         if (hx.uid === cHx.classList[1]+'-'+cHx.classList[2]){
             onLocation = hx
@@ -113,8 +124,23 @@ function findCurrentHex () {
     });
 } 
 findCurrentHex()
-console.log(onLocation)
+console.log(onLocation.adjacents)
 
+let adjacentHexes = onLocation.adjacents
+
+
+// let test = document.querySelector("#City-1")
+// test.addEventListener("click", () => console.log('Yay'))
+// console.log(test)
+// const hexes = document.querySelectorAll('.hex')
+// hexes.forEach(el => el.addEventListener('click', event => {
+//     moveHex ();
+//   }));
+
+island.forEach(hx => {
+    hx.div.addEventListener('click', event => {
+        hx.moveHex()
+});})
 
 
 // function popup(mylink, windowname) {
@@ -128,3 +154,4 @@ console.log(onLocation)
 
 // popup('../combat.html', "test")
 
+console.log(onLocation.adjacents)

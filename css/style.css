@@ -156,3 +156,18 @@ video {
     background-repeat: no-repeat;
     margin: 60px;
   }
+
+.hex {
+    -webkit-transition:  -webkit-transform 2s ease-in-out;
+    -moz-transition: -moz-transform 2s ease-in-out;
+    -o-transition: -o-transform 2s ease-in-out;
+    -ms-transition: -ms-transform 2s ease-in-out; 
+    transition: transform 2s ease-in-out; 
+}
+.hex:hover {
+    z-index: 1;
+   -webkit-transform:scale(1.2);
+   -moz-transform:scale(1.2);
+   -o-transform:scale(1.2);
+   transform:scale(1.2);
+}
