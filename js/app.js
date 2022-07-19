@@ -47,6 +47,7 @@ lcs.forEach(element => {
     }
 });
 island.pop()
+console.log(island)
 
 //randomly order the array each time. This will initiate a new island distribution for every game
 function shuffleArray(array) {
@@ -67,23 +68,11 @@ island.forEach(hx => {
     space += 1
 });
 
-// island.forEach(hx => {
-//     if(hx.space < 5) {
-//         hx.row = 'one'
-//     }
-//     else if(hx.space < 9) {
-//         hx.row = 'two'
-//     }
-//     else if(hx.space < 15) {
-//         hx.row = 'three'
-//     }
-//     else if(hx.space < 19) {
-//         hx.row = 'four'
-//     }
-//     else {
-//         hx.row = 'five'
-//     }
-// });
+//populate adjacent hex data
+island.forEach(hx => {
+    hx.adjacents = adjacents[hx.space]
+});
+
 
 // access temporary hex from html
 let hex = document.querySelector("#temp")
@@ -110,8 +99,21 @@ start.appendChild(hero)
 document.querySelector('#temp').parentNode.removeChild(document.querySelector('#temp'))
 
 
+//access hero's parent div and select adjacent hexes as selectable movement locations
 
-
+let onLocation = null
+function findCurrentHex () {
+    let cHx = document.querySelector('#hero').parentNode
+    // console.log(cHx.classList[3])
+    // console.log(cHx.classList[1], cHx.classList[2])
+    island.forEach(hx => {
+        if (hx.uid === cHx.classList[1]+'-'+cHx.classList[2]){
+            onLocation = hx
+        }
+    });
+} 
+findCurrentHex()
+console.log(onLocation)
 
 
 
