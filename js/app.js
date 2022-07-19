@@ -78,6 +78,12 @@ island.forEach(hx => {
     document.querySelector("#hex-container").appendChild(tempNode)
 });
 
+let start = document.querySelector(".City")
+let hero = document.createElement('div');
+hero.setAttribute('id', 'hero')
+start.appendChild(hero)
+
+
 //remove the temporary hex
 document.querySelector('#temp').parentNode.removeChild(document.querySelector('#temp'))
 

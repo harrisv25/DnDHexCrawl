@@ -142,3 +142,17 @@ video {
     left:865px;
     top:200px;
 }
+
+#hero {
+    border-radius: 50%;
+    border: 7px solid gold;
+    width: 60px;
+    height: 60px;
+    background-image: url('../img/hero1.gif');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    background-repeat: no-repeat;
+    margin: 60px;
+  }
