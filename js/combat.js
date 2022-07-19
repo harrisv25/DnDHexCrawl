@@ -78,12 +78,12 @@ class Hero {
 }
 
 class Enemy (
-    constructor (creature, attack, defense, hp, loot) {
+    constructor (creature, attack, defense, hp, cr) {
         this.creature = creature
         this.attack = attack
         this.defense = defense
         this.hp = hp
-        this.loot = loot
+        this.cr = cr
     }
 )
 

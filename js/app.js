@@ -65,7 +65,7 @@ island.forEach(hx => {
 // });
 
 // access temporary hex from html
-let hex = document.querySelector(".hex")
+let hex = document.querySelector("#temp")
 console.log(hex)
 
 // copy  the temp hex and write all new hex information for each hex in the island array. 
@@ -80,3 +80,15 @@ island.forEach(hx => {
 
 //remove the temporary hex
 document.querySelector('#temp').parentNode.removeChild(document.querySelector('#temp'))
+
+function popup(mylink, windowname) {
+    if (! window.focus)return true; 
+        var href; 
+    if (typeof(mylink) == 'string') href=mylink; 
+    else href=mylink.href; 
+        window.open(href, windowname, 'width=400,height=200,scrollbars=yes'); 
+        return false; 
+}
+
+popup('../combat.html', "test")
+

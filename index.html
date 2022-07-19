@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <a href='combat.html' onClick="return popup(this, 'notes')">my popup</a>
     <video playsinline autoplay muted loop poster="cake.jpg">
         <source src="./img/ocean.webm" type="video/webm">
         Your browser does not support the video tag.
@@ -21,6 +22,16 @@
         </section>
     </div>
     <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript">
+        function popup(mylink, windowname) {
+            if (! window.focus)return true; 
+                var href; 
+            if (typeof(mylink) == 'string') href=mylink; 
+            else href=mylink.href; 
+                window.open(href, windowname, 'width=400,height=200,scrollbars=yes'); 
+                return false; 
+}
+    </script>
 </body>
 </html>
 
