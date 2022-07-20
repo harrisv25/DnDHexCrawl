@@ -255,7 +255,8 @@ class Hero {
         this.name = name
         this.weapon = this.weapon
         this.defense = 1 + shields[this.left]
-        this.hp = 10 + armor[this.head] + armor[this.chest] + armor[this.legs] + armor[this.feet] 
+        this.maxHp = 10 + armor[this.head] + armor[this.chest] + armor[this.legs] + armor[this.feet] 
+        this.hp = this.maxHp
         this.speed = 30
         this.gold = 0
         this.pack = []
@@ -274,12 +275,15 @@ class Hero {
     getFeet = () => this.feet
     getGold = () => this.gold
     getPack = () => this.pack
-    weaponAttack = () => 1 + Math.floor(Math.random() * (weapons[test.weapon]))
+    weaponAttack = () => 1 + Math.floor(Math.random() * (weapons[this.weapon]))
     makeAttack = (target) => {
         let dmg = this.weaponAttack() - target.defense
         if (dmg > 0) {
+            enemy.style.width = parseInt((target.hp - dmg)*900/target.maxHp)+'px'
+            // enemy.style.width = "800px"
             target.hp = target.hp - dmg
         }
+        console.log(dmg, target.hp)
     }
 }
 
@@ -288,9 +292,16 @@ class Enemy {
         this.creature = creature
         this.attack = attack
         this.defense = defense
-        this.hp = hp
+        this.maxHp = hp
+        this.hp = this.maxHp
         this.cr = cr
-        // this.heathBar = new HealthBar(2000,2000,8000,750,this.hp, "green")
+    }
+    makeAttack = (target) => {
+        let dmg = this.attack - target.defense
+        if (dmg > 0) {
+            target.hp = target.hp - dmg
+        }
+        console.log(target.hp)
     }
 }
 
@@ -346,7 +357,6 @@ function randomEncounterRoll (id, lc) {
             else {
                 enc = r2
             }
-            console.log(enc.heathBar)
             main.style.display = 'none';
             combat.style.display = 'block';
             fight()
@@ -354,8 +364,13 @@ function randomEncounterRoll (id, lc) {
     }
 }
 
+let user = null
+let enemy = null 
 function fight() {
-    let user = document.querySelector('#user-hp')
-    user.style.width = "800px"
-    let enemy = document.querySelector("#enemy-hp")
+    user = document.querySelector('#user-hp')
+    // user.style.width = "800px"
+    enemy = document.querySelector("#enemy-hp")
 }
+
+const attack = document.querySelector('#attack')
+attack.addEventListener("click", () => player.makeAttack(enc))
