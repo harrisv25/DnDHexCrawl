@@ -8,32 +8,34 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- <a href='combat.html' onClick="return popup(this, 'notes')">my popup</a> -->
-    <video playsinline autoplay muted loop >
-        <source src="./img/ocean.webm" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
-    <div id="org-container">
-        <div id="background"></div>
-        <section id="island">
-            <div id="hex-container">
-                <div id="temp" class="hex">TEST HERE</div>
-            </div>
-        </section>
+    <div id="main">
+        <video playsinline autoplay muted loop >
+            <source src="./img/ocean.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+        <div id="org-container">
+            <div id="background"></div>
+            <section id="island">
+                <div id="hex-container">
+                    <div id="temp" class="hex">TEST HERE</div>
+                </div>
+            </section>
+        </div>
     </div>
-    <!-- <div src="/tables/monster.csv" id="monsterTable"></div> -->
-    <script type="text/javascript" src="js/app.js"></script>
-    <!-- <script type="module" src="js/combat.js"></script> -->
-    <!-- <script type="text/javascript">
-        function popup(mylink, windowname) {
-            if (! window.focus)return true; 
-                var href; 
-            if (typeof(mylink) == 'string') href=mylink; 
-            else href=mylink.href; 
-                window.open(href, windowname, 'width=400,height=200,scrollbars=yes'); 
-                return false; 
-}
-    </script> -->
+    <div id="combat">
+        <div id="user"></div>
+        <div id="user-actions"></div>
+        <div id="user-hp-container">
+            <h2>Player</h2>
+            <div id="user-hp"></div>
+        </div>
+        <div id="enemy"></div>
+        <div id="enemy-hp-container">
+            <h2>Enemy</h2>
+            <div id="enemy-hp"></div>
+        </div>
+    </div>
+    <script language="JavaScript" type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
 

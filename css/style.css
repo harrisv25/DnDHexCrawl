@@ -171,3 +171,74 @@ video {
    -o-transform:scale(1.2);
    transform:scale(1.2);
 } */
+
+
+/* styling for the combat page */
+#combat div{
+    background-color: aquamarine;
+    height: 200px;
+    width: 200px;
+}
+
+div#enemy {
+    position:absolute;
+    top:50px;
+    right:300px;
+    height: 600px;
+    width: 600px;
+    background-color: red;
+}
+
+div#enemy-hp-container {
+    position:absolute;
+    top:50px;
+    left:650px;
+    height: 100px;
+    width: 920px;
+    background-color: lightgrey;
+}
+
+div#enemy-hp {
+    position:absolute;
+    top:50px;
+    right: 10px;
+    height: 50px;
+    width: 900px;
+    background-color: green;
+}
+
+div#user {
+    position:absolute;
+    bottom: 50px;
+    left:200px;
+    height: 600px;
+    width: 600px;
+    background-color: purple;
+}
+
+div#user-hp-container {
+    position:absolute;
+    bottom:50px;
+    right:650px;
+    height: 100px;
+    width: 920px;
+    background-color: lightgrey;
+}
+
+div#user-hp {
+    position:absolute;
+    bottom:0px;
+    left:10px;
+    height: 50px;
+    width: 900px;
+    background-color: green;
+}
+
+div#user-actions {
+    position:absolute;
+    bottom: 50px;
+    left:800px;
+    height: 600px;
+    width: 200px;
+    background-color: orange;
+}

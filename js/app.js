@@ -1,3 +1,9 @@
+// access some html variable required throughout the script
+let main = document.querySelector('#main')
+let combat = document.querySelector('#combat')
+
+combat.style.display = 'none';
+
 // create class to host data about the hexes
 class Hex {
     constructor(type, id) {
@@ -57,7 +63,6 @@ lcs.forEach(element => {
     }
 });
 island.pop()
-console.log(island)
 
 //randomly order the array each time. This will initiate a new island distribution for every game
 function shuffleArray(array) {
@@ -68,7 +73,6 @@ function shuffleArray(array) {
 }
 
 shuffleArray(island)
-console.log(island)
 
 // create a attribute for the position each hex will take on an island. I want to convert this whole
 //process into a mathmatical postiioning system, but time does not allow yet. 
@@ -86,7 +90,6 @@ island.forEach(hx => {
 
 // access temporary hex from html
 let hex = document.querySelector("#temp")
-console.log(hex)
 
 // copy  the temp hex and write all new hex information for each hex in the island array. 
 // append it to the ul list
@@ -152,7 +155,6 @@ function findCurrentHex () {
     });
 } 
 findCurrentHex()
-console.log(onLocation.adjacents)
 
 let adjacentHexes = onLocation.adjacents
 
@@ -207,6 +209,41 @@ const armor = {
     'full-plate boots':3,
 }
 
+// class HealthBar {
+//     constructor (x, y, w, h, maxHealth, color) {
+//         this.x=x;
+//         this.y=y;
+//         this.w=w;
+//         this.h=h;
+//         this.maxHealth=maxHealth;
+//         this.maxWidth = this.w;
+//         this.heath = maxHealth;
+//         this.color = color;
+//     }
+
+//     show(context) {
+//         context1.lineWidth=4;
+//         context1.strokeStyle = "#333";
+//         context1.fillStyle = this.color;
+//         context1.fillRect(this.x, this.y, this.w, this.h);
+//         context1.strokeRect(this.x, this.y, this.maxWidth, this.h)
+//     }
+
+//     updateHealth(val) {
+//         if (val >=0 ) {
+//             this.health = val;
+//             this.w = (this.health / this.maxHealth) * this.maxWidth;
+//         }
+//     }
+// }
+
+
+// const frame = function(context, hb, width, height) {
+//     context.clearRect(0, 0, width, height);
+//     hb.show(context);
+//     requestAnimationFrame(frame);
+// }
+
 class Hero {
     constructor (name) {
         this.weapon = 'dagger'
@@ -222,6 +259,7 @@ class Hero {
         this.speed = 30
         this.gold = 0
         this.pack = []
+        // this.heathBar = new HealthBar(200,200,8000,750,this.hp, "green")
     }
     getName = () => this.name
     getWeapon = () => this.weapon
@@ -252,6 +290,7 @@ class Enemy {
         this.defense = defense
         this.hp = hp
         this.cr = cr
+        // this.heathBar = new HealthBar(2000,2000,8000,750,this.hp, "green")
     }
 }
 
@@ -290,7 +329,8 @@ for (let i = 0; i < monsters.length; i++) {
 
 let enc = null
 
-let test = new Hero('Sprinkles')
+let player = new Hero('Sprinkles')
+
 
 function randomEncounterRoll (id, lc) {
     if (id >= Math.floor(Math.random() * 10)) {
@@ -306,19 +346,16 @@ function randomEncounterRoll (id, lc) {
             else {
                 enc = r2
             }
+            console.log(enc.heathBar)
+            main.style.display = 'none';
+            combat.style.display = 'block';
+            fight()
         }
-        popup('../combat.html', "combat");
-        // let test = document.createElement('div')
-        // test.innerHTML = "Woot Woot"
-        // document.body.appendChild(test)
     }
 }
 
-function popup(mylink, windowname) {
-    if (! window.focus)return true; 
-        var href; 
-    if (typeof(mylink) == 'string') href=mylink; 
-    else href=mylink.href; 
-        window.open(href, windowname, 'width=600,height=400,scrollbars=yes');
-        return false; 
+function fight() {
+    let user = document.querySelector('#user-hp')
+    user.style.width = "800px"
+    let enemy = document.querySelector("#enemy-hp")
 }
