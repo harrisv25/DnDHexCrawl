@@ -157,7 +157,7 @@ video {
     margin: 60px;
   }
 
-.hex {
+/* .hex {
     -webkit-transition:  -webkit-transform 2s ease-in-out;
     -moz-transition: -moz-transform 2s ease-in-out;
     -o-transition: -o-transform 2s ease-in-out;
@@ -170,4 +170,4 @@ video {
    -moz-transform:scale(1.2);
    -o-transform:scale(1.2);
    transform:scale(1.2);
-}
+} */

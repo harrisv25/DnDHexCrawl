@@ -17,9 +17,6 @@ class Hex {
             adjacentHexes = onLocation.adjacents
             console.log(adjacentHexes)
         }}
-    // this.div.addEventListener('click', event => {
-    //     moveHex()
-    // })
 }
 
 const adjacents = {
@@ -128,15 +125,7 @@ console.log(onLocation.adjacents)
 
 let adjacentHexes = onLocation.adjacents
 
-
-// let test = document.querySelector("#City-1")
-// test.addEventListener("click", () => console.log('Yay'))
-// console.log(test)
-// const hexes = document.querySelectorAll('.hex')
-// hexes.forEach(el => el.addEventListener('click', event => {
-//     moveHex ();
-//   }));
-
+// add event listeners to all hexes that will move the hero and update the selectable tile list
 island.forEach(hx => {
     hx.div.addEventListener('click', event => {
         hx.moveHex()
@@ -152,6 +141,10 @@ island.forEach(hx => {
 //         return false; 
 // }
 
-// popup('../combat.html', "test")
 
-console.log(onLocation.adjacents)
+
+// island.forEach(hx => {
+//     hx.div.addEventListener('click', event => {
+//         popup('../combat.html', "test")
+// });})
+
