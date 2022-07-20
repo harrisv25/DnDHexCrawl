@@ -146,18 +146,21 @@ function randomEncounterRoll (id, lc) {
     }
 }
 function setOnListeners() {
-    let island = document.querySelectorAll('.on')
-    island.forEach(hx => {
+    let islandOn = document.querySelectorAll('.on')
+    islandOn.forEach(hx => {
         hx.addEventListener('click', event => {
             randomEncounterRoll(hx.classList[2], hx.classList[1])
-    });})}
+    });})
+}
 setOnListeners()
 
-
-let island = document.querySelectorAll('.hex')
-    island.forEach(hx => {
-        hx.addEventListener('click', event => {
-            setOnListeners()})})
+function setClickListeners() {
+    let island = document.querySelectorAll('.hex')
+        island.forEach(hx => {
+            hx.addEventListener('click', event => {
+                setOnListeners()})})
+    }
+setClickListeners()
 
 
 function popup(mylink, windowname) {
