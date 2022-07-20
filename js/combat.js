@@ -145,12 +145,20 @@ function randomEncounterRoll (id, lc) {
         document.body.appendChild(test)
     }
 }
+function setOnListeners() {
+    let island = document.querySelectorAll('.on')
+    island.forEach(hx => {
+        hx.addEventListener('click', event => {
+            randomEncounterRoll(hx.classList[2], hx.classList[1])
+    });})}
+setOnListeners()
 
-const island = document.querySelectorAll('.hex')
-island.forEach(hx => {
-    hx.addEventListener('click', event => {
-        randomEncounterRoll(hx.classList[2], hx.classList[1])
-});})
+
+let island = document.querySelectorAll('.hex')
+    island.forEach(hx => {
+        hx.addEventListener('click', event => {
+            setOnListeners()})})
+
 
 function popup(mylink, windowname) {
     if (! window.focus)return true; 

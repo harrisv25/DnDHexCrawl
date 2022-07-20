@@ -132,6 +132,7 @@ document.querySelector('#temp').parentNode.removeChild(document.querySelector('#
 
 
 //select the current hex object associated with the hex div that the hero is on
+// added an "on" class that updates with each adjacent list. 
 let onLocation = null
 function findCurrentHex () {
     island.forEach(hx => {
@@ -148,10 +149,6 @@ function findCurrentHex () {
                 onHex.classList.add("on")
             }
         } 
-        // else {
-        //     let offHex = document.querySelector('.'+numChange[hx.space])
-        //     offHex.classList.remove("on");
-        // }
     });
 } 
 findCurrentHex()
