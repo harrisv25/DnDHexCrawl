@@ -139,7 +139,10 @@ function randomEncounterRoll (id, lc) {
                 enc = r2
             }
         }
-        popup('../combat.html', "combat")
+        popup('../combat.html', "combat");
+        let test = document.createElement('div')
+        test.innerHTML = "Woot Woot"
+        document.body.appendChild(test)
     }
 }
 
@@ -154,13 +157,8 @@ function popup(mylink, windowname) {
         var href; 
     if (typeof(mylink) == 'string') href=mylink; 
     else href=mylink.href; 
-        window.open(href, windowname, 'width=600,height=400,scrollbars=yes'); 
+        window.open(href, windowname, 'width=600,height=400,scrollbars=yes');
         return false; 
 }
 
 
-
-// island.forEach(hx => {
-//     hx.div.addEventListener('click', event => {
-//         popup('../combat.html', "test")
-// });})

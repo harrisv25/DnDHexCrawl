@@ -15,7 +15,6 @@ class Hex {
             targetHex.appendChild(hero)
             findCurrentHex()
             adjacentHexes = onLocation.adjacents
-            console.log(adjacentHexes)
         }}
 }
 
@@ -90,9 +89,31 @@ console.log(hex)
 
 // copy  the temp hex and write all new hex information for each hex in the island array. 
 // append it to the ul list
+const numChange = {
+    1:'one',
+    2:'two',
+    3:'three',
+    4:'four',
+    5:'five', 
+    6:'six', 
+    7:'seven',
+    8:'eight',
+    9:'nine',
+    10:'ten',
+    11:'eleven',
+    12:'twelve',
+    13:'thirteen',
+    14:'fourteen',
+    15:'fifteen',
+    16:'sixteen',
+    17:'seventeen',
+    18:'eighteen',
+    19:'nineteen'
+}
+
 island.forEach(hx => {
     let tempNode = hex.cloneNode(true);
-    tempNode.classList.add(hx.type, hx.id, hx.space);
+    tempNode.classList.add(hx.type, hx.id, numChange[hx.space]);
     tempNode.setAttribute('id', hx.uid)
     tempNode.innerHTML = hx.uid
     document.querySelector("#hex-container").appendChild(tempNode)
@@ -113,11 +134,24 @@ document.querySelector('#temp').parentNode.removeChild(document.querySelector('#
 //select the current hex object associated with the hex div that the hero is on
 let onLocation = null
 function findCurrentHex () {
+    island.forEach(hx => {
+        let offHex = document.querySelector('.'+numChange[hx.space])
+        offHex.classList.remove("on");
+    })
     let cHx = document.querySelector('#hero').parentNode
     island.forEach(hx => {
         if (hx.uid === cHx.classList[1]+'-'+cHx.classList[2]){
             onLocation = hx
-        }
+            for (i in hx.adjacents) {
+                let onHex = document.querySelector('.'+numChange[hx.adjacents[i]])
+                console.log(onHex)
+                onHex.classList.add("on")
+            }
+        } 
+        // else {
+        //     let offHex = document.querySelector('.'+numChange[hx.space])
+        //     offHex.classList.remove("on");
+        // }
     });
 } 
 findCurrentHex()
@@ -125,11 +159,13 @@ console.log(onLocation.adjacents)
 
 let adjacentHexes = onLocation.adjacents
 
+
 // add event listeners to all hexes that will move the hero and update the selectable tile list
 island.forEach(hx => {
     hx.div.addEventListener('click', event => {
         hx.moveHex()
 });})
+
 
 
 // function popup(mylink, windowname) {
