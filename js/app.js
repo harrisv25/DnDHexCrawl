@@ -249,7 +249,7 @@ class Hero {
                 let loot = document.createElement("div")
                 loot.setAttribute('id', 'loot')
                 document.querySelector("#combat").append(loot)
-                loot.addEventListener("click", () => getLoot()) // prompt with random loot roll
+                loot.addEventListener("click", () => getLoot(target.cr)) // prompt with random loot roll
             }
         }
     }
@@ -284,9 +284,13 @@ function getLoot (cr) {
             pack.push(lootTable2[Math.floor(Math.random() * lootTable2.length)])
         }
     }
+    printPack = ''
     pack.forEach(i => {
         player.pack.push(i)
+        printPack = printPack +i+', '
     });
+    console.log(printPack)
+    alert(`Your Hero found ${printPack}`)
     let loot = document.querySelector("#loot")
     loot.parentNode.removeChild(loot)
     main.style.display = 'block';

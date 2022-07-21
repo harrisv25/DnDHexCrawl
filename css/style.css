@@ -272,10 +272,11 @@ div#attack {
 
 div#loot {
     position: absolute;
-    top:110px;
+    top:250px;
+    left:700px;
     height: 400px;
     width: 400px;
-    background-image: url('../img/loot.jpg');
+    background-image: url('../img/loot.png');
     --i : contain;
     background-size: var(--i);
     -moz-background-size: var(--i);
