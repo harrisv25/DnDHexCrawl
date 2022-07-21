@@ -270,35 +270,16 @@ div#attack {
     background-repeat: no-repeat;
 }
 
-/*extra functionality to build out later*/
-/* div#defend {
+div#loot {
     position: absolute;
     top:110px;
-    left: 6px;
-    height: 100px;
-    width: 100px;
-
-    background-image: url('../img/shield.png');
+    height: 400px;
+    width: 400px;
+    background-image: url('../img/loot.jpg');
     --i : contain;
-
     background-size: var(--i);
     -moz-background-size: var(--i);
     -o-background-size: var(--i);
     background-size: var(--i); 
     background-repeat: no-repeat;
 }
-div#potion {
-    position: absolute;
-    top:230px;
-    height: 100px;
-    width: 100px;
-
-    background-image: url('../img/potion.png');
-    --i : contain;
-
-    background-size: var(--i);
-    -moz-background-size: var(--i);
-    -o-background-size: var(--i);
-    background-size: var(--i); 
-    background-repeat: no-repeat;
-} */

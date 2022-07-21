@@ -167,7 +167,6 @@ island.forEach(hx => {
 
 
 // Start of combat script
-
 const weapons = {
     "dagger" : 4,
     "fine dagger" : 5,
@@ -208,42 +207,6 @@ const armor = {
     'full-plate leggings':3,
     'full-plate boots':3,
 }
-
-// class HealthBar {
-//     constructor (x, y, w, h, maxHealth, color) {
-//         this.x=x;
-//         this.y=y;
-//         this.w=w;
-//         this.h=h;
-//         this.maxHealth=maxHealth;
-//         this.maxWidth = this.w;
-//         this.heath = maxHealth;
-//         this.color = color;
-//     }
-
-//     show(context) {
-//         context1.lineWidth=4;
-//         context1.strokeStyle = "#333";
-//         context1.fillStyle = this.color;
-//         context1.fillRect(this.x, this.y, this.w, this.h);
-//         context1.strokeRect(this.x, this.y, this.maxWidth, this.h)
-//     }
-
-//     updateHealth(val) {
-//         if (val >=0 ) {
-//             this.health = val;
-//             this.w = (this.health / this.maxHealth) * this.maxWidth;
-//         }
-//     }
-// }
-
-
-// const frame = function(context, hb, width, height) {
-//     context.clearRect(0, 0, width, height);
-//     hb.show(context);
-//     requestAnimationFrame(frame);
-// }
-
 class Hero {
     constructor (name) {
         this.weapon = 'dagger'
@@ -260,7 +223,6 @@ class Hero {
         this.speed = 30
         this.gold = 0
         this.pack = []
-        // this.heathBar = new HealthBar(200,200,8000,750,this.hp, "green")
     }
     getName = () => this.name
     getWeapon = () => this.weapon
@@ -282,9 +244,53 @@ class Hero {
             enemy.style.width = parseInt((target.hp - dmg)*900/target.maxHp)+'px'
             // enemy.style.width = "800px"
             target.hp = target.hp - dmg
+            if (target.hp <= 0) {
+                enemy.style.width = 0
+                let loot = document.createElement("div")
+                loot.setAttribute('id', 'loot')
+                document.querySelector("#combat").append(loot)
+                loot.addEventListener("click", () => getLoot()) // prompt with random loot roll
+            }
         }
-        console.log(dmg, target.hp)
     }
+}
+
+const lootObj = {
+    1:[1],
+    2:[2],
+    3:[3],
+    4:[1,3],
+    5:[3,3] 
+}
+
+const lootTable1 = ["leather helmet", 'leather chest','leather leggings','leather boots', 
+'fine shield', "fine dagger", "sword", "fine sword", "hammer", "fine hammer"]
+const lootTable2 = ["chainmail helmet",'chainmail chest','chainmail leggings','chainmail boots', 
+'great shield', "great dagger" ,"great sword", "great hammer"]
+const lootTable3 = ["full-plate helmet",'full-plate chest','full-plate leggings','full-plate boots', 
+'mastercraft shield', "mastercraft dagger",  "mastercraft sword", "mastercraft hammer"]
+
+
+function getLoot (cr) {
+    pack = []
+    for (t in lootObj[cr]) {
+        if (lootObj[cr][t] === 1) {
+            pack.push(lootTable1[Math.floor(Math.random() * lootTable1.length)])
+        }
+        else if (lootObj[cr][t] === 2) {
+            pack.push(lootTable2[Math.floor(Math.random() * lootTable2.length)])
+        }
+        else {
+            pack.push(lootTable2[Math.floor(Math.random() * lootTable2.length)])
+        }
+    }
+    pack.forEach(i => {
+        player.pack.push(i)
+    });
+    let loot = document.querySelector("#loot")
+    loot.parentNode.removeChild(loot)
+    main.style.display = 'block';
+    combat.style.display = 'none';
 }
 
 class Enemy {
