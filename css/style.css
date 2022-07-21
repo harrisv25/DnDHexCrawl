@@ -284,3 +284,24 @@ div#loot {
     background-size: var(--i); 
     background-repeat: no-repeat;
 }
+
+div#end {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: url('../img/death.jpg');
+    --i : cover;
+    background-size: var(--i);
+    -moz-background-size: var(--i);
+    -o-background-size: var(--i);
+    background-size: var(--i); 
+    background-repeat: no-repeat;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div#end#end {
+    color:red;
+    font-size: 50px;
+}

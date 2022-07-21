@@ -167,6 +167,9 @@ island.forEach(hx => {
 
 
 // Start of combat script
+
+let turnOrder = 0
+
 const weapons = {
     "dagger" : 4,
     "fine dagger" : 5,
@@ -242,7 +245,6 @@ class Hero {
         let dmg = this.weaponAttack() - target.defense
         if (dmg > 0) {
             enemy.style.width = parseInt((target.hp - dmg)*900/target.maxHp)+'px'
-            // enemy.style.width = "800px"
             target.hp = target.hp - dmg
             if (target.hp <= 0) {
                 enemy.style.width = 0
@@ -251,7 +253,9 @@ class Hero {
                 document.querySelector("#combat").append(loot)
                 loot.addEventListener("click", () => getLoot(target.cr)) // prompt with random loot roll
             }
+            target.makeAttack(this)
         }
+        target.makeAttack(this)
     }
 }
 
@@ -289,7 +293,6 @@ function getLoot (cr) {
         player.pack.push(i)
         printPack = printPack +i+', '
     });
-    console.log(printPack)
     alert(`Your Hero found ${printPack}`)
     let loot = document.querySelector("#loot")
     loot.parentNode.removeChild(loot)
@@ -309,9 +312,20 @@ class Enemy {
     makeAttack = (target) => {
         let dmg = this.attack - target.defense
         if (dmg > 0) {
+            user.style.width = parseInt((target.hp - dmg)*900/target.maxHp)+'px'
             target.hp = target.hp - dmg
+            turnOrder = 0
+            if (target.hp <= 0) {
+                enemy.style.width = 0
+                let loot = document.createElement("div")
+                loot.setAttribute('id', 'end')
+                let text = document.createElement("h1")
+                text.setAttribute('id', 'game-over')
+                text.innerHTML = "You Died, Game Over"
+                loot.append(text)
+                document.querySelector("#combat").append(loot)
+            }
         }
-        console.log(target.hp)
     }
 }
 
