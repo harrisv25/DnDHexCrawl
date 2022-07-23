@@ -405,7 +405,7 @@ function randomEncounterRoll (id, lc) {
             imgLink = `https://github.com/harrisv25/DnDHexCrawl/blob/main/img/monsters/${enc.img}?raw=true`
             console.log(imgLink)
             // document.querySelector('#enemy').style.backgroundImage = `url("./img/monsters/${enc.img}")`;
-            document.querySelector('#enemy').style.backgroundImage = 'url(imgLink)';
+            document.querySelector('#enemy').style.backgroundImage = 'url(`$imgLink`)';
             // document.body.style.backgroundImage = 'url("https://github.com/harrisv25/mini-tamagotchi/blob/main/img/wild_background.gif?raw=true")';
         
         }
