@@ -211,7 +211,8 @@ class Hero {
             if (target.hp <= 0) {
                 enemy.style.width = 0
                 if (target.creature === 'Dark_Wizard') {
-                    document.body.style.backgroundImage = 'url("../img/victory.gif")'
+                    // document.body.style.backgroundImage = 'url("../img/victory.gif")'
+                    document.body.style.backgroundImage = 'url("https://github.com/harrisv25/DnDHexCrawl/blob/main/img/victory.gif?raw=true")';
                     let text = document.createElement("div")
                     text.setAttribute('id', 'victory')
                     text.innerHTML = "You saved Cercasta! Thank you hero!"
@@ -401,7 +402,7 @@ function randomEncounterRoll (id, lc) {
             fight()
             main.style.display = 'none';
             combat.style.display = 'block';
-            imgLink = `https://github.com/harrisv25/DnDHexCrawl/blob/main/img/monsters/${enc.img}`
+            imgLink = `https://github.com/harrisv25/DnDHexCrawl/blob/main/img/monsters/${enc.img}?raw=true`
             // document.querySelector('#enemy').style.backgroundImage = `url("../img/monsters/${enc.img}")`;
             document.querySelector('#enemy').style.backgroundImage = 'url(imgLink)';
             // document.body.style.backgroundImage = 'url("https://github.com/harrisv25/mini-tamagotchi/blob/main/img/wild_background.gif?raw=true")';
