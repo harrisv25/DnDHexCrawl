@@ -369,11 +369,16 @@ body {
 
 div#enemy {
     position:absolute;
-    top:50px;
-    right:200px;
-    height: 400px;
-    width: 400px;
-    background-color: red;
+    top:200px;
+    right:500px;
+    height: 600px;
+    width: 600px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    background-repeat: no-repeat;
+    /* background-color: red; */
 }
 
 div#enemy-hp-container {

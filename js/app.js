@@ -256,6 +256,7 @@ class Hero {
                 this.hp = Math.ceil(this.maxHp/2)
             }
         }
+        document.querySelector('user-hp').style.width = parseInt((this.hp)*900/this.maxHp)+'px'
     }
 }
 
@@ -303,13 +304,14 @@ function getLoot (cr) {
 }
 
 class Enemy {
-    constructor (creature, attack, defense, hp, cr) {
+    constructor (creature, attack, defense, hp, cr, img) {
         this.creature = creature
         this.attack = attack
         this.defense = defense
         this.maxHp = hp
         this.hp = this.maxHp
         this.cr = cr
+        this.img = img
     }
     makeAttack = (target) => {
         let dmg = this.attack - target.defense
@@ -342,6 +344,9 @@ let Plain="Plain"
 const mHexes = [[Forest, Mountain, Plain],[Forest, Mountain, Plain],[Forest, Mountain, Plain],[Forest, Mountain],[Forest, Plain],[Forest],
 [Forest],[Forest, Mountain],[Mountain, Plain],[Forest, Mountain],[Forest, Plain],[Plain],[Forest],[Mountain],
 [Forest, Mountain, Plain],[Mountain],[Forest, Mountain, Plain],[Forest, Mountain],[Plain],[Mountain, Forest]]
+const images = ['goblin.png', 'wolf.png', 'orc.png', 'ogre.png', 'bandit.png', 'awakened_bush.png', 'awakened_tree.png', 'troll.png',
+'giant.png', 'dragon.png', 'boar.png', 'centaur.png', 'giant_ape.png', 'golem.png', 'goblin_master.png', 'Winter_wolf.png', 
+'dark_assassin.png', 'bugbear.png', 'scarecrow.png', 'slime.png']
 
 let encounter = {
     'Forest':[],
@@ -352,13 +357,13 @@ let encounter = {
 for (let i = 0; i < monsters.length; i++) {
     mHexes[i].forEach(lc => {
         if (lc === 'Forest' ) {
-            encounter['Forest'].push(new Enemy(monsters[i], mAttacks[i], mDefense[i], mHP[i], mCR[i]))
+            encounter['Forest'].push(new Enemy(monsters[i], mAttacks[i], mDefense[i], mHP[i], mCR[i], images[i]))
         }
         else if (lc === 'Mountain') {
-            encounter['Mountain'].push(new Enemy(monsters[i], mAttacks[i], mDefense[i], mHP[i], mCR[i]))
+            encounter['Mountain'].push(new Enemy(monsters[i], mAttacks[i], mDefense[i], mHP[i], mCR[i], images[i]))
         }
         else {
-            encounter['Plain'].push(new Enemy(monsters[i], mAttacks[i], mDefense[i], mHP[i], mCR[i]))
+            encounter['Plain'].push(new Enemy(monsters[i], mAttacks[i], mDefense[i], mHP[i], mCR[i], images[i]))
         }
     });
 }
@@ -394,6 +399,8 @@ function randomEncounterRoll (id, lc) {
             fight()
             main.style.display = 'none';
             combat.style.display = 'block';
+            document.querySelector('#enemy').style.backgroundImage = `url("../img/monsters/${enc.img}")`;
+        
         }
     }
 }
@@ -403,6 +410,8 @@ let enemy = null
 function fight() {
     user = document.querySelector('#user-hp')
     enemy = document.querySelector("#enemy-hp")
+    enemy.style.width = '900px';
+    user.style.width = parseInt((player.hp)*900/player.maxHp)+'px'
 }
 
 const attack = document.querySelector('#attack')
