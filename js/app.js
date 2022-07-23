@@ -502,7 +502,8 @@ function wizardFight () {
     if (document.querySelector("#hero").parentNode === dTower) {
         enc = darkWizard
         fight()
-        document.querySelector('#enemy').style.backgroundImage = `url("../img/monsters/${enc.img}")`;
+        imgLink = "url(https://github.com/harrisv25/DnDHexCrawl/blob/main/img/monsters/"+enc.img+"?raw=true)";
+        document.querySelector('#enemy').style.backgroundImage = imgLink;
         main.style.display = 'none';
         combat.style.display = 'block';
     }
