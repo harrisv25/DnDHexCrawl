@@ -210,10 +210,21 @@ class Hero {
             target.hp = target.hp - dmg
             if (target.hp <= 0) {
                 enemy.style.width = 0
-                let loot = document.createElement("div")
-                loot.setAttribute('id', 'loot')
-                document.querySelector("#combat").append(loot)
-                loot.addEventListener("click", () => getLoot(target.cr)) 
+                if (target.creature === 'Dark_Wizard') {
+                    document.body.style.backgroundImage = 'url("../img/victory.gif")'
+                    let text = document.createElement("div")
+                    text.setAttribute('id', 'victory')
+                    text.innerHTML = "You saved Cercasta! Thank you hero!"
+                    document.body.appendChild(text)
+                    main.style.display = 'none';
+                    combat.style.display = 'none';
+                }
+                else {
+                    let loot = document.createElement("div")
+                    loot.setAttribute('id', 'loot')
+                    document.querySelector("#combat").append(loot)
+                    loot.addEventListener("click", () => getLoot(target.cr)) 
+                }
             }
             target.makeAttack(this)
         }
@@ -478,7 +489,10 @@ equipFeet.addEventListener('click', event => {
 
 
 const darkWizard = new Enemy('Dark_Wizard', 7, 5, 30, 6, 'dark_wizard.png')
+darkWizard.alive = 1
 
+
+let dTower = document.querySelector('#Dark-Tower-1')
 function wizardFight () {
     if (document.querySelector("#hero").parentNode === dTower) {
         enc = darkWizard
@@ -489,5 +503,4 @@ function wizardFight () {
     }
 }
 
-let dTower = document.querySelector('#Dark-Tower-1')
 dTower.addEventListener("click", () => wizardFight())

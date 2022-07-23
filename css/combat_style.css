@@ -151,3 +151,14 @@ div#end#end {
     color:red;
     font-size: 50px;
 }
+
+#victory {
+    color:black;
+    position: absolute;
+    font-size: 57px;
+    left:800px;
+    top:500px;
+    border-radius: 15%;
+    width: 870px;
+    background-color: gold;
+}
