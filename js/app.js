@@ -472,6 +472,7 @@ equipHead.addEventListener('click', event => {
     player.pack.push(player.head);
     player.head = player.piece
     player.maxHp = 10 + armor[player.head] + armor[player.chest] + armor[player.legs] + armor[player.feet]
+    player.hp = player.maxHp
 })
 
 let equipChest = document.querySelector('#chest')
@@ -480,6 +481,7 @@ equipChest.addEventListener('click', event => {
     player.pack.push(player.chest);
     player.chest = player.piece
     player.maxHp = 10 + armor[player.head] + armor[player.chest] + armor[player.legs] + armor[player.feet]
+    player.hp = player.maxHp
 })
 
 let equipLegs = document.querySelector('#legs')
@@ -488,6 +490,7 @@ equipLegs.addEventListener('click', event => {
     player.pack.push(player.legs);
     player.legs = player.piece
     player.maxHp = 10 + armor[player.head] + armor[player.chest] + armor[player.legs] + armor[player.feet]
+    player.hp = player.maxHp
 })
 
 let equipFeet = document.querySelector('#feet')
@@ -496,7 +499,9 @@ equipFeet.addEventListener('click', event => {
     player.pack.push(player.legs);
     player.feet = player.piece
     player.maxHp = 10 + armor[player.head] + armor[player.chest] + armor[player.legs] + armor[player.feet]
+    player.hp = player.maxHp
 })
+
 
 
 const darkWizard = new Enemy('Dark_Wizard', 7, 5, 30, 6, 'dark_wizard.png')
