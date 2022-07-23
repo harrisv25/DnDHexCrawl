@@ -402,7 +402,7 @@ function randomEncounterRoll (id, lc) {
             fight()
             main.style.display = 'none';
             combat.style.display = 'block';
-            imgLink = "url("+`https://github.com/harrisv25/DnDHexCrawl/blob/main/img/monsters/${enc.img}?raw=true`+")";
+            imgLink = "url(https://github.com/harrisv25/DnDHexCrawl/tree/main/img/monsters/"+enc.img+"?raw=true`)";
             console.log(imgLink)
             // document.querySelector('#enemy').style.backgroundImage = "url(`./img/monsters/${enc.img}`)";
             document.querySelector('#enemy').style.backgroundImage = imgLink;
