@@ -401,7 +401,9 @@ function randomEncounterRoll (id, lc) {
             fight()
             main.style.display = 'none';
             combat.style.display = 'block';
-            document.querySelector('#enemy').style.backgroundImage = `url("../img/monsters/${enc.img}")`;
+            // document.querySelector('#enemy').style.backgroundImage = `url("../img/monsters/${enc.img}")`;
+            document.querySelector('#enemy').style.backgroundImage = `url("https://github.com/harrisv25/DnDHexCrawl/blob/main/img/monsters/${enc.img}")`;
+            
         
         }
     }
