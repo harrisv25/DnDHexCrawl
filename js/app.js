@@ -1,8 +1,10 @@
 // access some html variable required throughout the script
 let main = document.querySelector('#main')
 let combat = document.querySelector('#combat')
-
 combat.style.display = 'none';
+
+
+// Script regarding the hex creations and organizations
 
 // create class to host data about the hexes
 class Hex {
@@ -25,6 +27,9 @@ class Hex {
         }}
 }
 
+// for now, my hexes are assigned a fixed position. These represent the adjacent 
+// hex spaces for each space.
+// needs refinedment
 const adjacents = {
     1: [2, 4, 5],
     2: [1, 3, 5, 6],
@@ -93,6 +98,8 @@ let hex = document.querySelector("#temp")
 
 // copy  the temp hex and write all new hex information for each hex in the island array. 
 // append it to the ul list
+// there are packages that seem to do this, but figuring out how to import them was stalling me up.
+// needs refinement
 const numChange = {
     1:'one', 2:'two', 3:'three', 4:'four', 5:'five', 6:'six', 7:'seven', 8:'eight', 9:'nine',
     10:'ten', 11:'eleven', 12:'twelve', 13:'thirteen', 14:'fourteen', 15:'fifteen', 16:'sixteen',
@@ -150,50 +157,33 @@ island.forEach(hx => {
 });})
 
 
-// Start of combat script
 
-let turnOrder = 0
 
+
+
+
+
+// Start of combat script. This script deals with the hero and encounter classes re-writting each other's data
+
+
+// These represnt the items in the game and the metric values that they give the players
 const weapons = {
-    "dagger" : 4,
-    "fine dagger" : 5,
-    "great dagger" : 6,
-    "mastercraft dagger" : 7,
-    "sword" : 6,
-    "fine sword" : 7,
-    "great sword" : 8,
-    "mastercraft sword" : 9,
-    "hammer" : 8,
-    "fine hammer" : 9,
-    "great hammer" : 10,
-    "mastercraft hammer" : 11,
+    "dagger" : 4, "fine dagger" : 5, "great dagger" : 6, "mastercraft dagger" : 7, "sword" : 6, "fine sword" : 7,
+    "great sword" : 8, "mastercraft sword" : 9, "hammer" : 8, "fine hammer" : 9, "great hammer" : 10, "mastercraft hammer" : 11,
 }
 
 const shields = {
-    'shield' : 1,
-    'fine shield' : 2,
-    'great shield' : 3, 
-    'mastercraft shield' : 4,
+    'shield' : 1, 'fine shield' : 2, 'great shield' : 3, 'mastercraft shield' : 4,
 }
 
 const armor = {
-    "ragged hat" : 0,
-    'ragged shirt':0,
-    'ragged pants':0,
-    'ragged shoes':0,
-    "leather helmet" : 1,
-    'leather chest':1,
-    'leather leggings':1,
-    'leather boots':1,
-    "chainmail helmet" : 2,
-    'chainmail chest':2,
-    'chainmail leggings':2,
-    'chainmail boots':2,
-    "full-plate helmet" : 3,
-    'full-plate chest':3,
-    'full-plate leggings':3,
+    "ragged hat" : 0, 'ragged shirt':0, 'ragged pants':0, 'ragged shoes':0, "leather helmet" : 1,
+    'leather chest':1, 'leather leggings':1, 'leather boots':1, "chainmail helmet" : 2, 'chainmail chest':2,
+    'chainmail leggings':2, 'chainmail boots':2, "full-plate helmet" : 3, 'full-plate chest':3,'full-plate leggings':3,
     'full-plate boots':3,
 }
+
+// create the hero class with its attributes and a few ingame methods
 class Hero {
     constructor (name) {
         this.weapon = 'dagger'
@@ -261,16 +251,15 @@ class Hero {
     }
 }
 
-let player = new Hero('Sprinkles')
+// initiate the player. Allow player to name the hero. 
+let player = new Hero("Hero")
 
+// This object converts the encounter's CR into table rolls
 const lootObj = {
-    1:[1],
-    2:[2],
-    3:[3],
-    4:[1,3],
-    5:[3,3] 
+    1:[1], 2:[2], 3:[3], 4:[1,3], 5:[3,3] 
 }
 
+// These arrays organize the in-game items into rollable tables
 const lootTable1 = ["leather helmet", 'leather chest','leather leggings','leather boots', 
 'fine shield', "fine dagger", "sword", "fine sword", "hammer", "fine hammer"]
 const lootTable2 = ["chainmail helmet",'chainmail chest','chainmail leggings','chainmail boots', 
@@ -279,6 +268,7 @@ const lootTable3 = ["full-plate helmet",'full-plate chest','full-plate leggings'
 'mastercraft shield', "mastercraft dagger",  "mastercraft sword", "mastercraft hammer"]
 
 
+//define the loot rolller in which takes in the cr and applies them to the appropriate tables
 function getLoot (cr) {
     pack = []
     for (t in lootObj[cr]) {
@@ -293,6 +283,7 @@ function getLoot (cr) {
         }
     }
     printPack = ''
+    // Add the rolled up loot to the player's pack
     pack.forEach(i => {
         player.pack.push(i)
         printPack = printPack +i+', '
@@ -304,6 +295,8 @@ function getLoot (cr) {
     combat.style.display = 'none';
 }
 
+// create the enemy class. it is a similar but reduced version of the hero class. 
+// could set up an inheritance path for these two
 class Enemy {
     constructor (creature, attack, defense, hp, cr, img) {
         this.creature = creature
@@ -333,6 +326,8 @@ class Enemy {
     }
 }
 
+
+//Originally hosted in csv file, these array are the encounters to be passed through the enemy class
 const monsters = ["Goblin","Wolf","Orc","Ogre","Bandit","Awakend Bush","Awakend Tree","Troll","Giant","Dragon","Boar","Centaur",
 "Giant Ape","Golem","Goblin Master","Winter Wolf","Dark Assasin","Bugbear","Scarecrow","Slime"]
 const mAttacks =[2,3,3,3,2,1,2,2,4,5,1,3,4,3,3,3,4,3,1,1]
@@ -349,12 +344,16 @@ const images = ['goblin.png', 'wolf.png', 'orc.png', 'ogre.png', 'bandit.png', '
 'giant.png', 'dragon.png', 'boar.png', 'centaur.png', 'giant_ape.png', 'golem.png', 'goblin_master.png', 'Winter_wolf.png', 
 'dark_assassin.png', 'bugbear.png', 'scarecrow.png', 'slime.png']
 
+
+
+// organization section. Hex data will be able to be passed through and roll the appropriate environment
 let encounter = {
     'Forest':[],
     'Mountain':[],
     'Plain':[]
 }
 
+// automate the creation of all enemy encounters
 for (let i = 0; i < monsters.length; i++) {
     mHexes[i].forEach(lc => {
         if (lc === 'Forest' ) {
@@ -363,7 +362,7 @@ for (let i = 0; i < monsters.length; i++) {
         else if (lc === 'Mountain') {
             encounter['Mountain'].push(new Enemy(monsters[i], mAttacks[i], mDefense[i], mHP[i], mCR[i], images[i]))
         }
-        else {
+        else if (lc === 'Plain'){
             encounter['Plain'].push(new Enemy(monsters[i], mAttacks[i], mDefense[i], mHP[i], mCR[i], images[i]))
         }
     });
@@ -371,17 +370,8 @@ for (let i = 0; i < monsters.length; i++) {
 
 let enc = null
 
-function displayStats () {
-    let statHp = document.querySelector('#hp')
-    let statAp = document.querySelector('#attack_power')
-    let statDp = document.querySelector('#defese')
-    statHp.innerHTML = `Current HP: ${parseInt(player.hp)}`
-    statAp.innerHTML = `Current Attack Power: ${parseInt(player.attack)}`
-    statDp.innerHTML = `Current Defense: ${parseInt(player.defense)}` 
-}
 
-let runner = window.setInterval(displayStats, 100);
-
+//defines the probability of a random encounter, and then randomly selects an appropriate one.
 function randomEncounterRoll (id, lc) {
     if (id >= Math.floor(Math.random() * 10)) {
         if (id <= 4) {
@@ -406,16 +396,35 @@ function randomEncounterRoll (id, lc) {
     }
 }
 
+
+// Sets some of the combat parameters for each encounter instance
 let user = null
 let enemy = null 
+
 function fight() {
     user = document.querySelector('#user-hp')
     enemy = document.querySelector("#enemy-hp")
     enemy.style.width = '900px';
     user.style.width = parseInt((player.hp)*900/player.maxHp)+'px'
     document.querySelector('#eName').innerHTML = enc.creature
+    // document.querySelector('#uName').innerHTML = player.name
 }
 
+
+//constantly updates the player's statssmith
+function displayStats () {
+    let statHp = document.querySelector('#hp')
+    let statAp = document.querySelector('#attack_power')
+    let statDp = document.querySelector('#defese')
+    statHp.innerHTML = `Current HP: ${parseInt(player.hp)}`
+    statAp.innerHTML = `Current Attack Power: ${parseInt(player.attack)}`
+    statDp.innerHTML = `Current Defense: ${parseInt(player.defense)}` 
+}
+
+let runner = window.setInterval(displayStats, 100);
+
+
+//set all the event listerns
 const attack = document.querySelector('#attack')
 attack.addEventListener("click", () => player.makeAttack(enc))
 
@@ -428,35 +437,57 @@ rest.addEventListener("click", () => player.takeRest())
 let equipWeapon = document.querySelector('#weapon')
 equipWeapon.addEventListener("click", () => player.equipItem())
 equipWeapon.addEventListener('click', event => {
+    player.pack.push(player.weapon);
     player.weapon = player.piece
 })
 
 let equipShield = document.querySelector('#shield')
 equipShield.addEventListener("click", () => player.equipItem())
 equipShield.addEventListener('click', event => {
+    player.pack.push(player.left);
     player.left = player.piece
 })
 
 let equipHead = document.querySelector('#head')
 equipHead.addEventListener("click", () => player.equipItem())
 equipHead.addEventListener('click', event => {
+    player.pack.push(player.head);
     player.head = player.piece
 })
 
 let equipChest = document.querySelector('#chest')
 equipChest.addEventListener("click", () => player.equipItem())
 equipChest.addEventListener('click', event => {
+    player.pack.push(player.chest);
     player.chest = player.piece
 })
 
 let equipLegs = document.querySelector('#legs')
 equipLegs.addEventListener("click", () => player.equipItem())
 equipLegs.addEventListener('click', event => {
+    player.pack.push(player.legs);
     player.legs = player.piece
 })
 
 let equipFeet = document.querySelector('#feet')
 equipFeet.addEventListener("click", () => player.equipItem())
 equipFeet.addEventListener('click', event => {
+    player.pack.push(player.legs);
     player.feet = player.piece
 })
+
+
+const darkWizard = new Enemy('Dark_Wizard', 7, 5, 30, 6, 'dark_wizard.png')
+
+function wizardFight () {
+    if (document.querySelector("#hero").parentNode === dTower) {
+        enc = darkWizard
+        fight()
+        document.querySelector('#enemy').style.backgroundImage = `url("../img/monsters/${enc.img}")`;
+        main.style.display = 'none';
+        combat.style.display = 'block';
+    }
+}
+
+let dTower = document.querySelector('#Dark-Tower-1')
+dTower.addEventListener("click", () => wizardFight())
