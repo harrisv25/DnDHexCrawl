@@ -210,6 +210,7 @@ class Hero {
         this.speed = 30
         this.gold = 0
         this.pack = []
+        this.piece = null
     }
     weaponAttack = () => 1 + Math.floor(Math.random() * (weapons[this.weapon]))
     makeAttack = (target) => {
@@ -233,14 +234,14 @@ class Hero {
         main.style.display = 'block';
         combat.style.display = 'none';
     }
-    equipItem = (piece) => {
-        console.log(this.piece)
+    equipItem = () => {
         if (this.pack.length < 1 ) {
             alert(`There is nothign in your pack. You are currently wearing ${this.weapon}, ${this.left}, ${this.head}, ${this.chest}, ${this.legs}, ${this.feet}`)
         }
         else {
-            this.piece = prompt(`You have the following in your pack ${this.pack}. Please select the approprate piece of gear to put in your ${piece} slot`, "")
+            this.piece = prompt(`You have the following in your pack:  ${this.pack}. Please select the approprate piece of gear.`, "")
         }
+        this.pack.splice(this.pack.indexOf(this.piece), 1)
     }
     takeRest = () => {
         if ( 5 >= Math.floor(Math.random() * 10)) {
@@ -426,18 +427,36 @@ rest.addEventListener("click", () => player.takeRest())
 
 let equipWeapon = document.querySelector('#weapon')
 equipWeapon.addEventListener("click", () => player.equipItem())
+equipWeapon.addEventListener('click', event => {
+    player.weapon = player.piece
+})
 
 let equipShield = document.querySelector('#shield')
 equipShield.addEventListener("click", () => player.equipItem())
+equipShield.addEventListener('click', event => {
+    player.left = player.piece
+})
 
 let equipHead = document.querySelector('#head')
 equipHead.addEventListener("click", () => player.equipItem())
+equipHead.addEventListener('click', event => {
+    player.head = player.piece
+})
 
 let equipChest = document.querySelector('#chest')
 equipChest.addEventListener("click", () => player.equipItem())
+equipChest.addEventListener('click', event => {
+    player.chest = player.piece
+})
 
 let equipLegs = document.querySelector('#legs')
 equipLegs.addEventListener("click", () => player.equipItem())
+equipLegs.addEventListener('click', event => {
+    player.legs = player.piece
+})
 
 let equipFeet = document.querySelector('#feet')
 equipFeet.addEventListener("click", () => player.equipItem())
+equipFeet.addEventListener('click', event => {
+    player.feet = player.piece
+})
