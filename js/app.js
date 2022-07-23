@@ -455,6 +455,7 @@ equipWeapon.addEventListener("click", () => player.equipItem())
 equipWeapon.addEventListener('click', event => {
     player.pack.push(player.weapon);
     player.weapon = player.piece
+    player.attack = weapons[player.weapon]
 })
 
 let equipShield = document.querySelector('#shield')
@@ -462,6 +463,7 @@ equipShield.addEventListener("click", () => player.equipItem())
 equipShield.addEventListener('click', event => {
     player.pack.push(player.left);
     player.left = player.piece
+    player.defense = 1 + shields[player.left]
 })
 
 let equipHead = document.querySelector('#head')
@@ -469,6 +471,7 @@ equipHead.addEventListener("click", () => player.equipItem())
 equipHead.addEventListener('click', event => {
     player.pack.push(player.head);
     player.head = player.piece
+    player.maxHp = 10 + armor[player.head] + armor[player.chest] + armor[player.legs] + armor[player.feet]
 })
 
 let equipChest = document.querySelector('#chest')
@@ -476,6 +479,7 @@ equipChest.addEventListener("click", () => player.equipItem())
 equipChest.addEventListener('click', event => {
     player.pack.push(player.chest);
     player.chest = player.piece
+    player.maxHp = 10 + armor[player.head] + armor[player.chest] + armor[player.legs] + armor[player.feet]
 })
 
 let equipLegs = document.querySelector('#legs')
@@ -483,6 +487,7 @@ equipLegs.addEventListener("click", () => player.equipItem())
 equipLegs.addEventListener('click', event => {
     player.pack.push(player.legs);
     player.legs = player.piece
+    player.maxHp = 10 + armor[player.head] + armor[player.chest] + armor[player.legs] + armor[player.feet]
 })
 
 let equipFeet = document.querySelector('#feet')
@@ -490,6 +495,7 @@ equipFeet.addEventListener("click", () => player.equipItem())
 equipFeet.addEventListener('click', event => {
     player.pack.push(player.legs);
     player.feet = player.piece
+    player.maxHp = 10 + armor[player.head] + armor[player.chest] + armor[player.legs] + armor[player.feet]
 })
 
 
