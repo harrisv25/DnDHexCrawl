@@ -94,25 +94,9 @@ let hex = document.querySelector("#temp")
 // copy  the temp hex and write all new hex information for each hex in the island array. 
 // append it to the ul list
 const numChange = {
-    1:'one',
-    2:'two',
-    3:'three',
-    4:'four',
-    5:'five', 
-    6:'six', 
-    7:'seven',
-    8:'eight',
-    9:'nine',
-    10:'ten',
-    11:'eleven',
-    12:'twelve',
-    13:'thirteen',
-    14:'fourteen',
-    15:'fifteen',
-    16:'sixteen',
-    17:'seventeen',
-    18:'eighteen',
-    19:'nineteen'
+    1:'one', 2:'two', 3:'three', 4:'four', 5:'five', 6:'six', 7:'seven', 8:'eight', 9:'nine',
+    10:'ten', 11:'eleven', 12:'twelve', 13:'thirteen', 14:'fourteen', 15:'fifteen', 16:'sixteen',
+    17:'seventeen', 18:'eighteen', 19:'nineteen'
 }
 
 island.forEach(hx => {
@@ -219,7 +203,7 @@ class Hero {
         this.legs = 'ragged pants'
         this.feet = 'ragged shoes'
         this.name = name
-        this.weapon = this.weapon
+        this.attack= weapons[this.weapon]
         this.defense = 1 + shields[this.left]
         this.maxHp = 10 + armor[this.head] + armor[this.chest] + armor[this.legs] + armor[this.feet] 
         this.hp = this.maxHp
@@ -227,19 +211,6 @@ class Hero {
         this.gold = 0
         this.pack = []
     }
-    getName = () => this.name
-    getWeapon = () => this.weapon
-    getDefense = () => this.defense
-    getHp = () => this.hp
-    getSpeed = () => this.speed
-    getWeapon = () => this.weapon
-    getLeft = () => this.left
-    getHead = () => this.head
-    getChest = () => this.chest
-    getLegs = () => this.legs
-    getFeet = () => this.feet
-    getGold = () => this.gold
-    getPack = () => this.pack
     weaponAttack = () => 1 + Math.floor(Math.random() * (weapons[this.weapon]))
     makeAttack = (target) => {
         let dmg = this.weaponAttack() - target.defense
@@ -251,13 +222,44 @@ class Hero {
                 let loot = document.createElement("div")
                 loot.setAttribute('id', 'loot')
                 document.querySelector("#combat").append(loot)
-                loot.addEventListener("click", () => getLoot(target.cr)) // prompt with random loot roll
+                loot.addEventListener("click", () => getLoot(target.cr)) 
             }
             target.makeAttack(this)
         }
         target.makeAttack(this)
     }
+    runAway = () => {
+        this.hp = Math.ceil(this.hp/2)
+        main.style.display = 'block';
+        combat.style.display = 'none';
+    }
+    equipItem = (piece) => {
+        console.log(this.piece)
+        if (this.pack.length < 1 ) {
+            alert(`There is nothign in your pack. You are currently wearing ${this.weapon}, ${this.left}, ${this.head}, ${this.chest}, ${this.legs}, ${this.feet}`)
+        }
+        else {
+            this.piece = prompt(`You have the following in your pack ${this.pack}. Please select the approprate piece of gear to put in your ${piece} slot`, "")
+        }
+    }
+    takeRest = () => {
+        if ( 5 >= Math.floor(Math.random() * 10)) {
+            let item = Math.floor(Math.random() * this.pack.length)
+            if (this.pack[item] !== undefined) {
+                alert(`${this.pack[item]} was stolen in the night`)
+            }
+            this.pack.splice(item, 1);
+            if (this.hp > (this.maxHp/2 - 1)) {
+                this.hp = this.maxHp
+            }
+            else {
+                this.hp = Math.ceil(this.maxHp/2)
+            }
+        }
+    }
 }
+
+let player = new Hero('Sprinkles')
 
 const lootObj = {
     1:[1],
@@ -314,7 +316,6 @@ class Enemy {
         if (dmg > 0) {
             user.style.width = parseInt((target.hp - dmg)*900/target.maxHp)+'px'
             target.hp = target.hp - dmg
-            turnOrder = 0
             if (target.hp <= 0) {
                 enemy.style.width = 0
                 let loot = document.createElement("div")
@@ -364,13 +365,22 @@ for (let i = 0; i < monsters.length; i++) {
 
 let enc = null
 
-let player = new Hero('Sprinkles')
+function displayStats () {
+    let statHp = document.querySelector('#hp')
+    let statAp = document.querySelector('#attack_power')
+    let statDp = document.querySelector('#defese')
+    statHp.innerHTML = `Current HP: ${parseInt(player.hp)}`
+    statAp.innerHTML = `Current Attack Power: ${parseInt(player.attack)}`
+    statDp.innerHTML = `Current Defense: ${parseInt(player.defense)}` 
+}
 
+let runner = window.setInterval(displayStats, 100);
 
 function randomEncounterRoll (id, lc) {
     if (id >= Math.floor(Math.random() * 10)) {
         if (id <= 4) {
             enc = encounter[lc][Math.floor(Math.random() * encounter[lc].length)]
+            fight()
         }
         else {
             let r1 = encounter[lc][Math.floor(Math.random() * encounter[lc].length)]
@@ -381,9 +391,9 @@ function randomEncounterRoll (id, lc) {
             else {
                 enc = r2
             }
+            fight()
             main.style.display = 'none';
             combat.style.display = 'block';
-            fight()
         }
     }
 }
@@ -392,9 +402,32 @@ let user = null
 let enemy = null 
 function fight() {
     user = document.querySelector('#user-hp')
-    // user.style.width = "800px"
     enemy = document.querySelector("#enemy-hp")
 }
 
 const attack = document.querySelector('#attack')
 attack.addEventListener("click", () => player.makeAttack(enc))
+
+const runAway = document.querySelector('#run-away')
+runAway.addEventListener("click", () => player.runAway())
+
+const rest = document.querySelector('#rest')
+rest.addEventListener("click", () => player.takeRest())
+
+let equipWeapon = document.querySelector('#weapon')
+equipWeapon.addEventListener("click", () => player.equipItem())
+
+let equipShield = document.querySelector('#shield')
+equipShield.addEventListener("click", () => player.equipItem())
+
+let equipHead = document.querySelector('#head')
+equipHead.addEventListener("click", () => player.equipItem())
+
+let equipChest = document.querySelector('#chest')
+equipChest.addEventListener("click", () => player.equipItem())
+
+let equipLegs = document.querySelector('#legs')
+equipLegs.addEventListener("click", () => player.equipItem())
+
+let equipFeet = document.querySelector('#feet')
+equipFeet.addEventListener("click", () => player.equipItem())
