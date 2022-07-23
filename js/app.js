@@ -412,6 +412,7 @@ function fight() {
     enemy = document.querySelector("#enemy-hp")
     enemy.style.width = '900px';
     user.style.width = parseInt((player.hp)*900/player.maxHp)+'px'
+    document.querySelector('#eName').innerHTML = enc.creature
 }
 
 const attack = document.querySelector('#attack')
